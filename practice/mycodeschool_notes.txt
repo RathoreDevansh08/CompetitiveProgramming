@@ -1,0 +1,83 @@
++++++++++++++++++++++++++++++++++++++ mycodeschool.com ++++++++++++++++++++++++++++++++++++++++
+
+=>Abstract data structures:
+define data and operations but no implementations
+
+=>operations in a stack:
+push, pop, top, isEmpty ...... O(1) time complexity
+
+=> malloc implementation:
+struct Node* temp =(struct Node*)malloc(sizeof(struct Node*));
+
+=>space and time complexity [O(...)] decides how efficient a code is
+
+=>order of operations:
+1. exponents, 2. multiplication & division, 3. addition & subtraction
+
+=>notations:
+>three types of notations:
+infix, postfix, prefix
+>prefix notation is also called polish notation, postfix is also called reverse polish notation
+""can see the codes for conversions among different notations""
+
+=>binary tree:
+>every node can have atmost two child nodes
+>root node is the topmost node
+>leafnodes are the nodes with no child nodes
+>height of tree: no. of edges in the longest path from root node to the leaf nodes
+>height of root = height of tree
+>height of a node is the max. no. of edges from that node to a leaf node extending from it
+>depth of node is the edges from that node to the root node
+>finding height of binary tree using recursion:""see code in the end of the video""
+
+=>binary search tree(BST):
+value at right child node should be more than a particular node and left child node value should be lesser or
+equal to that particular node, moreover, there should be reecursive BST pattern only in that tree
+
+in BST, values of left subtree must be strictly smaller/equal and values of right subtree must be strictly greater than the corresponding value of node
+
+> BST traversal: process of visiting every node in tree exactly once in some order
+> visit: reading or processing data in a node 
+> tree traversal:
+	~breadth first/level order i.e. according to the horizontal levels ... [timecomplexity=O(n)]
+	~depth first: preorder(root>left>right), inorder(left>root>right), postorder(left>right>root)
+
+=>graphs: a graph G is an ordered pair of set of vertices V and a set of edges E, a tree is a special graph
+>G=(V,E), (a,b)!=(b,a)
+>graphs: directed/undirected
+> a simple path in a graph is a path in which no vertex or path is repeated
+
+=>during inoreder traversal we travel through nodes in a bst in ascending order 
+	
+=>HEAPS:a heap is a specialized tree-based data structure that satisfies the heap property: if P is a parent node of C, then the key (the value) of P is either greater than or equal to (in a max heap) or less than or equal to (in a min heap) the key of C.The node at the "top" of the heap (with no parents) is called the root node. 
+>The common operations involving heaps are:
+
+Basic
+
+    find-max [or find-min]: find a maximum item of a max-heap, or a minimum item of a min-heap, respectively (a.k.a. peek)
+    insert: adding a new key to the heap (a.k.a., push[3])
+    extract-max [or extract-min]: returns the node of maximum value from a max heap [or minimum value from a min heap] after removing it from the heap (a.k.a., pop[4])
+    delete-max [or delete-min]: removing the root node of a max heap [or min heap], respectively
+    replace: pop root and push a new key. More efficient than pop followed by push, since only need to balance once, not twice, and appropriate for fixed-size heaps.[5]
+
+Creation
+
+    create-heap: create an empty heap
+    heapify: create a heap out of given array of elements
+    merge (union): joining two heaps to form a valid new heap containing all the elements of both, preserving the original heaps.
+    meld: joining two heaps to form a valid new heap containing all the elements of both, destroying the original heaps.
+
+Inspection
+
+    size: return the number of items in the heap.
+    is-empty: return true if the heap is empty, false otherwise.
+
+Internal
+
+    increase-key or decrease-key: updating a key within a max- or min-heap, respectively
+    delete: delete an arbitrary node (followed by moving last node and sifting to maintain heap)
+    sift-up: move a node up in the tree, as long as needed; used to restore heap condition after insertion. Called "sift" because node moves up the tree until it reaches the correct level, as in a sieve.
+    sift-down: move a node down in the tree, similar to sift-up; used to restore heap condition after deletion or replacement.
+
+>Applications of Heaps:
+1) Heap Sort: Heap Sort uses Binary Heap to sort an array in O(nLogn) time.
