@@ -1,0 +1,49 @@
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+int check(int n)
+{
+	int h,f=1;
+	for(int i=5;i<=n/2;i++)
+	{
+		if(n%i==0 && n/i>=5)
+		{
+			return i; 
+		}
+	}
+	return -1;
+}
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	
+	int n,f,a,b;
+	cin>>n;
+	if(n<25) cout<<-1<<"\n";
+	else
+	{
+		f=check(n);
+		if(f==-1) cout<<"-1\n";
+		else
+		{
+			a=f;b=n/f;
+			char ch[a][b],m;
+			vector<char>v(5);
+			v[0]='a';v[1]='e';v[2]='i';v[3]='o';v[4]='u';
+			for(int i=0;i<a;i++)
+			{
+				for(int j=0;j<b;j++)
+				{
+					cout<<v[(i+j)%5];
+				}
+			}
+			cout<<"\n";
+		}
+	}
+	
+	return 0;
+}
