@@ -20,7 +20,7 @@ void inorder(struct node *root)
     if (root != NULL) 
     { 
         inorder(root->left); 
-        cout<<  root->key; 
+        cout<<  root->key << " "; 
         inorder(root->right); 
     } 
 } 
@@ -47,6 +47,7 @@ struct node * minValueNode(struct node* node)
     return current; 
 } 
 
+//Time complexity : O(height_of_tree)
 struct node* deleteNode(struct node* root, int key) 
 { 
     if (root == NULL) return root; 
@@ -85,6 +86,53 @@ struct node* deleteNode(struct node* root, int key)
     return root; 
 } 
 
+//Time complexity : O(n)
+struct node* constructTreeUtil( int pre[], int* preIndex, int key,  
+                                int min, int max, int size )  
+{  
+    // Base case  
+    if( *preIndex >= size )  
+        return NULL;  
+  
+    node* root = NULL;  
+  
+    // If current element of pre[] is in range, then  
+    // only it is part of current subtree  
+    if( key > min && key < max )  
+    {  
+        // Allocate memory for root of this  
+        // subtree and increment *preIndex  
+        root = newNode ( key );  
+        *preIndex = *preIndex + 1;  
+          
+        if (*preIndex < size)  
+        {  
+            // Construct the subtree under root  
+            // All nodes which are in range  
+            // {min .. key} will go in left  
+            // subtree, and first such node  
+            // will be root of left subtree.  
+            root->left = constructTreeUtil( pre, preIndex, pre[*preIndex],  
+                                        min, key, size );  
+  
+            // All nodes which are in range  
+            // {key..max} will go in right  
+            // subtree, and first such node 
+            // will be root of right subtree.  
+            root->right = constructTreeUtil( pre, preIndex, pre[*preIndex],  
+                                        key, max, size );  
+        }  
+    }  
+    return root;  
+}  
+
+struct node *constructTree (int pre[], int size)  
+{  
+    int preIndex = 0;  
+    return constructTreeUtil ( pre, &preIndex, pre[0], INT_MIN,  
+                            INT_MAX, size );  
+}  
+
 int main() 
 { 
     struct node *root = NULL; 
@@ -97,22 +145,36 @@ int main()
     root = insert(root, 80); 
   
     cout << "Inorder traversal of the given tree \n"; 
-    inorder(root); 
+    inorder(root);
+    cout << "\n"; 
   
     cout<<"\nDelete 20\n"; 
     root = deleteNode(root, 20); 
     cout<<"Inorder traversal of the modified tree \n"; 
-    inorder(root); 
+    inorder(root);
+    cout << "\n"; 
   
     cout<<"\nDelete 30\n"; 
     root = deleteNode(root, 30); 
     cout<<"Inorder traversal of the modified tree \n"; 
     inorder(root); 
+    cout << "\n"; 
   
     cout<<"\nDelete 50\n"; 
     root = deleteNode(root, 50); 
     cout<<"Inorder traversal of the modified tree \n"; 
-    inorder(root); 
+    inorder(root);
+    cout << "\n";  
   
+    // Pre-order traversal to BST
+    int pre[] = {10, 5, 1, 7, 40, 50};  
+    int size = sizeof( pre ) / sizeof( pre[0] );  
+  
+    node *ro = constructTree(pre, size);  
+  
+    cout<<"\nInorder traversal of the constructed tree: \n";  
+    inorder(ro);
+    cout << "\n"; 
+       
     return 0; 
 } 
